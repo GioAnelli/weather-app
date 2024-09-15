@@ -1,0 +1,11 @@
+body {
+  margin: unset;
+}
+
+:root {
+  --primary: yellow;
+  --white: #ffffff;
+  --background: #f6f6f6;
+  --border: #d8d5d5;
+  --black: #000000;
+}

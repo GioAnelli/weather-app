@@ -1,0 +1,30 @@
+.card-container-hourly {
+  display: flex;
+
+  gap: 16px;
+  padding: 16px;
+  overflow-x: auto;
+}
+
+.card-wrapper-hourly {
+  flex: 1 0 8%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.card-hourly {
+  width: 150px;
+  border-radius: 20px;
+}
+
+.card-hourly.expanded {
+  flex-grow: 1;
+}
+
+.card-hourly-content {
+  overflow: hidden;
+}

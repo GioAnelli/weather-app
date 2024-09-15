@@ -1,0 +1,32 @@
+.nav-bar {
+  height: 80px;
+  min-height: 80px;
+  width: 100vw;
+  background-color: var(--white);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0px 5px 15px -3px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.first-column {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-left: 15px;
+  height: 50px;
+}
+
+.second-column,
+.third-column {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button {
+  height: 50px;
+  font-weight: bold;
+}
