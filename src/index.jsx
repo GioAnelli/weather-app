@@ -28,10 +28,6 @@ const router = createBrowserRouter([
           },
         ],
       },
-      {
-        path: "test",
-        element: <p>secondo children</p>,
-      },
     ],
   },
 ]);

@@ -40,7 +40,9 @@ export const SubHome = () => {
   console.log(city);
   return (
     <div>
-      {city === "" ? (
+      {loading && <h1>Loading weather info...</h1>}
+      {error && <h1>Error: {error}</h1>}
+      {city === "" && !loading && !error ? (
         <h1>Loading weather info</h1>
       ) : (
         <>

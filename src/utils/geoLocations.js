@@ -1,3 +1,5 @@
+// get browser location
+
 export const getCurrentPosition = () => {
   return new Promise((resolve, reject) => {
     if (!navigator.geolocation) {
@@ -15,17 +17,19 @@ export const getCurrentPosition = () => {
   });
 };
 
+// gets browser language
+
 export const getBrowserLang = () => {
-  let lang 
+  let lang;
   if (navigator.languages && navigator.languages.length) {
-    lang = navigator.languages[0]
+    lang = navigator.languages[0];
   } else if (navigator.language) {
-    lang = navigator.language
+    lang = navigator.language;
   } else {
-    lang = 'en'
+    lang = "en";
   }
 
-  return lang
+  return lang;
 };
 
-export const getBrowserLangSimple = () => getBrowserLang().slice(0,2)
+export const getBrowserLangSimple = () => getBrowserLang().slice(0, 2);
