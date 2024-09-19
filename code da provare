@@ -1,0 +1,7 @@
+i weathercard hanno bisogno di position per settare i parametri del meteo.
+
+possibili soluzioni:
+
+1. fai settare i parametri meteo da home o subhome passando la posizione al positionSlice e quindi a setMeteoDescription e rimuovi lo useEffect dalle cards.
+
+2. fai calcolare sempre la posizione da subhome anche se cityinredux è null (se sicty in redux è null, ma cityfromhome non è null non c'è la posizione disponibile)

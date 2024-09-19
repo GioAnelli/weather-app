@@ -34,12 +34,14 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function WeatherCard() {
+export default function WeatherCard({ hourlyWeather }) {
   const dispatch = useDispatch();
   const [expanded, setExpanded] = useState({});
   const windSpeedUnit = useSelector((state) => state.units.wind);
   const temperatureUnit = useSelector((state) => state.units.temperature);
-  const hourlyWeather = useSelector((state) => state.position.weather.hourly);
+  // const hourlyWeather = useSelector((state) => state.position.weather.hourly);
+
+  console.log("hourlyWeather" + hourlyWeather);
 
   const setNewPosition = (position) => {
     dispatch(updatePositionAndWeather(position));

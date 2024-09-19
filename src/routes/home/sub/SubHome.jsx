@@ -21,12 +21,15 @@ export const SubHome = () => {
 
   const loading = useSelector((state) => state.position.loading);
   const error = useSelector((state) => state.position.error);
+  // const dailyWeather = useSelector((state) => state.position.weather.daily);
+  // const hourlyWeather = useSelector((state) => state.position.weather.hourly);
+  const weather = useSelector((state) => state.position.weather);
 
   console.log(position); // checking position
 
   const dispatch = useDispatch();
 
-  const city = cityFromHome || cityInRedux;
+  const city = cityFromHome !== undefined ? cityFromHome : cityInRedux;
   console.log("City in Redux:", cityInRedux);
   console.log("City in use:", city); // Verifica quale città viene effettivamente usata
 
@@ -36,7 +39,7 @@ export const SubHome = () => {
 
   const getPosition = () => {
     // Se non c'è già una posizione/città salvata, usa la geolocalizzazione
-    if (!city && !position) {
+    if (!cityInRedux && !cityFromHome) {
       getCurrentPosition()
         .then((position) => {
           setNewPosition({
@@ -57,7 +60,7 @@ export const SubHome = () => {
   useEffect(() => {
     console.log("City in Redux:", city);
     getPosition();
-  }, [city, position]); // Aggiungi 'city' e 'position' come dipendenze
+  }, [city]); // Aggiungi 'city' e 'position' come dipendenze
 
   console.log(city);
   return (
@@ -70,9 +73,18 @@ export const SubHome = () => {
         <>
           <h1 className="city-name">Weather in {city}</h1>
           <h2 className="description">Hourly Weather for the next 48 H</h2>
-          <WeatherHourlyCard />
+          {weather && weather.hourly ? (
+            <WeatherHourlyCard hourlyWeather={weather.hourly} />
+          ) : (
+            <p>No hourly weather data available</p>
+          )}
           <h2 className="description">Daily Weather for the next 8 Days</h2>
-          <WeatherDailyCard />
+          {/* Controlla se esiste dailyWeather prima di passarlo */}
+          {weather && weather.daily ? (
+            <WeatherDailyCard dailyWeather={weather.daily} />
+          ) : (
+            <p>No daily weather data available</p>
+          )}
         </>
       )}
     </div>

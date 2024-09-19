@@ -38,7 +38,7 @@ export const Navbar = () => {
           sx={{ color: "var(--black)" }}
           onClick={() => navigate("/sub")}
         >
-          Weather Details
+          Weather in your Location
         </Button>
         <SettingSelector />
       </div>

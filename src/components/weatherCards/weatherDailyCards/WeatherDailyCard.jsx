@@ -33,16 +33,17 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-const WeatherTable = () => {
-  const dailyWeather = useSelector((state) => state.position.weather.daily);
+const WeatherTable = ({ dailyWeather }) => {
+  // const dailyWeather = useSelector((state) => state.position.weather.daily);
   const temperatureUnit = useSelector((state) => state.units.temperature);
   const windSpeedUnit = useSelector((state) => state.units.wind);
 
   const [expanded, setExpanded] = useState({});
 
-  useEffect(() => {
-    setExpanded({});
-  }, [dailyWeather]);
+  // VERIFICA SE QUESTO SERVE ----------------------------------------
+  // useEffect(() => {
+  //   setExpanded({});
+  // }, [dailyWeather]);
 
   if (!dailyWeather) {
     return <p>Loading...</p>;
