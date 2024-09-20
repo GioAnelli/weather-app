@@ -56,10 +56,6 @@ export const SubHome = () => {
     setFirstRender(false);
   }, [cityInRedux, cityFromHome, firstRender]);
 
-  console.log("City in Redux:", cityInRedux);
-  console.log("City from Home:", cityFromHome);
-  console.log("City in use:", city);
-
   return (
     <div>
       {error && <h1>Error: {error}</h1>}

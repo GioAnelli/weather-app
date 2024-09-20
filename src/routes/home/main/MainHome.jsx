@@ -17,8 +17,6 @@ export const MainHome = () => {
   const weather = useSelector((state) => state.position.weather);
   const temperatureUnit = useSelector((state) => state.units.temperature);
 
-  console.log("logging" + city);
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -90,7 +88,6 @@ export const MainHome = () => {
         variant="contained"
         sx={{ borderRadius: "12px" }}
         onClick={() => {
-          console.log("Città selezionata:", city); // Log della città cercata
           navigate("/sub", { state: { city } });
         }}
       >

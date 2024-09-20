@@ -39,12 +39,10 @@ export default function SettingSelector() {
     }
   };
   const handleSave = () => {
-    console.log("Dispatching wind unit: ", windUnitTemporary);
     dispatch(setTemperature(tempUnitTemporary));
     dispatch(setWind(windUnitTemporary));
     setOpen(false);
   };
-  console.log(temperatureUnit);
 
   return (
     <div>
