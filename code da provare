@@ -1,7 +1,3 @@
-i weathercard hanno bisogno di position per settare i parametri del meteo.
+controlla le weather card per vedere se ha bisogno di fare la ricerca della posizione;
 
-possibili soluzioni:
-
-1. fai settare i parametri meteo da home o subhome passando la posizione al positionSlice e quindi a setMeteoDescription e rimuovi lo useEffect dalle cards.
-
-2. fai calcolare sempre la posizione da subhome anche se cityinredux è null (se sicty in redux è null, ma cityfromhome non è null non c'è la posizione disponibile)
+se c'è già una città passata dalla home, il nome della città su subhome non si aggiorna, ma le condizioni meteo si

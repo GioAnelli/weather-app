@@ -9,11 +9,14 @@ import Button from "@mui/material/Button";
 export const Navbar = () => {
   const location = useLocation();
   const checkHome = () => location.pathname === "/";
+  const checkSubHome = () => location.pathname === "/sub";
   const [isHome, setIsHome] = useState(checkHome());
+  const [isSubHome, setIsSubHome] = useState(checkSubHome());
   const navigate = useNavigate();
 
   useEffect(() => {
     setIsHome(checkHome());
+    setIsSubHome(checkSubHome());
   }, [location]);
 
   return (
@@ -33,13 +36,18 @@ export const Navbar = () => {
         >
           Home
         </Button>
-        <Button
-          variant="text"
-          sx={{ color: "var(--black)" }}
-          onClick={() => navigate("/sub")}
-        >
-          Weather in your Location
-        </Button>
+        {!isSubHome ? (
+          <Button
+            variant="text"
+            sx={{ color: "var(--black)" }}
+            onClick={() => navigate("/sub")}
+          >
+            Weather in your Location
+          </Button>
+        ) : (
+          ""
+        )}
+
         <SettingSelector />
       </div>
     </nav>
