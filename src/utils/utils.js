@@ -1,4 +1,25 @@
 import { getBrowserLang } from "./geoLocations";
+import { useEffect, useState } from "react";
+
+const usePageReload = () => {
+  const [isReloaded, setIsReloaded] = useState(false);
+
+  useEffect(() => {
+    const navigationEntries = performance.getEntriesByType("navigation");
+    if (navigationEntries.length > 0) {
+      const navigationType = navigationEntries[0].type;
+      if (navigationType === "reload") {
+        setIsReloaded(true);
+      } else {
+        setIsReloaded(false);
+      }
+    }
+  }, []);
+
+  return isReloaded;
+};
+
+export default usePageReload;
 
 const browserLang = getBrowserLang();
 

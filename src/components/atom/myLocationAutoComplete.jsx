@@ -106,6 +106,8 @@ export default function MyLocationAutoComplete() {
         />
       )}
       renderOption={(props, option) => {
+        const { key, ...restProps } = props; // Extract key
+
         const matches =
           option.structured_formatting.main_text_matched_substrings || [];
 
@@ -115,7 +117,7 @@ export default function MyLocationAutoComplete() {
         );
 
         return (
-          <li {...props}>
+          <li key={key} {...restProps}>
             <Grid container alignItems="center">
               <Grid item sx={{ display: "flex", width: 44 }}>
                 <LocationOnIcon sx={{ color: "text.secondary" }} />

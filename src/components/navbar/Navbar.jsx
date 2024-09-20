@@ -28,7 +28,7 @@ export const Navbar = () => {
       <div className="second-column">
         {!isHome ? <MyLocationAutoComplete /> : ""}
       </div>
-      <div class="third-column">
+      <div className="third-column">
         <Button
           variant="text"
           sx={{ color: "var(--black)" }}
