@@ -1,0 +1,15 @@
+.footer {
+  background-color: white;
+  color: black;
+  padding: 10px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 100;
+  border-top: 1px solid var(--border);
+}
+
+.footer-content p {
+  margin: 5px 0;
+}

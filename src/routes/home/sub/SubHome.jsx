@@ -38,7 +38,7 @@ export const SubHome = () => {
   };
 
   const getPosition = () => {
-    if (!cityInRedux && !cityFromHome) {
+    if (!cityInRedux) {
       getCurrentPosition()
         .then((position) => {
           setNewPosition({
@@ -59,6 +59,8 @@ export const SubHome = () => {
   useEffect(() => {
     getPosition();
   }, [city]); // Dipende da `city`
+  console.log("city redux", cityInRedux);
+  console.log("city home", cityFromHome);
 
   return (
     <div>
