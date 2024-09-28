@@ -42,6 +42,7 @@ export const MainHome = () => {
 
   useEffect(() => {
     getPosition(); // Ottenere la posizione del browser quando la pagina viene caricata
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Calcola la temperatura basata sull'unità di misura selezionata

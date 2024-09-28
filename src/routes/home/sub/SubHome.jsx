@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import WeatherDailyCard from "../../../components/weatherCards/weatherDailyCards/WeatherDailyCard";
@@ -15,9 +15,6 @@ export const SubHome = () => {
   const error = useSelector((state) => state.position.error);
   const dispatch = useDispatch();
 
-  // Stato locale per gestire il primo render
-  const [firstRender, setFirstRender] = useState(true);
-
   // Usa stato locale per memorizzare la città attuale
   const [city, setCity] = useState(cityFromHome || cityInRedux);
 
@@ -26,19 +23,18 @@ export const SubHome = () => {
   };
 
   // Funzione per ottenere la posizione
-  const getPosition = async () => {
+  const getPosition = useCallback(async () => {
     try {
-      getCurrentPosition().then((position) => {
-        setNewPosition({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        });
+      const position = await getCurrentPosition();
+      setNewPosition({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
       });
     } catch (err) {
       alert("Non hai autorizzato il browser a leggere la posizione attuale");
       console.log(err);
     }
-  };
+  }, [dispatch]);
 
   // Effettua l'assegnazione di cityFromHome solo al primo render
   useEffect(() => {
@@ -52,12 +48,9 @@ export const SubHome = () => {
       } else if (!cityFromHome && !cityInRedux) {
         await getPosition(); // Geolocalizzazione se nessuna città è presente
       }
-
-      // Dopo il primo render, evita di usare cityFromHome in futuro
-      setFirstRender(false);
     };
     fetchData();
-  }, [cityInRedux, cityFromHome]);
+  }, [cityInRedux, cityFromHome, getPosition]);
 
   return (
     <div>
