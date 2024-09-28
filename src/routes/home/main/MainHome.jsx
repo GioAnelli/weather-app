@@ -20,28 +20,32 @@ export const MainHome = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  // Funzione per aggiornare la posizione corrente del browser
   const setNewPosition = (position) => {
     dispatch(updatePositionAndWeather(position));
   };
 
-  const getPosition = () => {
-    getCurrentPosition()
-      .then((position) => {
-        setNewPosition({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        });
-      })
-      .catch((err) => {
-        alert("non hai autorizzato il browser a leggere la posizione attuale");
-        console.log(err);
-        setNewPosition(undefined);
+  // Ottieni la posizione corrente del browser all'avvio della pagina
+  const getPosition = async () => {
+    try {
+      const position = await getCurrentPosition();
+      setNewPosition({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
       });
+    } catch (err) {
+      alert("Non hai autorizzato il browser a leggere la posizione attuale");
+      console.log(err);
+      setNewPosition(undefined);
+    }
   };
 
   useEffect(() => {
-    getPosition();
+    getPosition(); // Ottenere la posizione del browser quando la pagina viene caricata
   }, []);
+
+  // Calcola la temperatura basata sull'unità di misura selezionata
+
   let temperature;
   if (weather && temperatureUnit === "C°") {
     temperature = celsius(weather.current.temp);
@@ -74,12 +78,17 @@ export const MainHome = () => {
       )}
 
       {error && <p>Error: {error}</p>}
+
+      {/* Autocompletamento per cercare la città */}
+
       <MyLocationAutoComplete />
       <br />
       <Button
         variant="contained"
         sx={{ borderRadius: "12px" }}
-        onClick={() => navigate("/sub")}
+        onClick={() => {
+          navigate("/sub", { state: { city } });
+        }}
       >
         View More details
       </Button>

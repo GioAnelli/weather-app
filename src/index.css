@@ -1,11 +1,21 @@
 body {
-  margin: unset;
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  background-color: var(--background);
+  color: var(--black);
 }
 
 :root {
-  --primary: yellow;
+  --primary: #ffd700;
   --white: #ffffff;
   --background: #f6f6f6;
   --border: #d8d5d5;
   --black: #000000;
+}
+
+@media (min-width: 1200px) {
+  body {
+    font-size: 18px;
+  }
 }

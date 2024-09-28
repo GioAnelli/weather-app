@@ -20,31 +20,35 @@ export default function SettingSelector() {
   const [tempUnitTemporary, setTempUnitTemporary] = useState(temperatureUnit);
   const [windUnitTemporary, setWindUnitTemporary] = useState(windSpeedUnit);
 
+  // Gestore per il cambiamento dell'unità di temperatura
   const handleTempChange = (event) => {
     setTempUnitTemporary(event.target.value);
   };
+
+  // Gestore per il cambiamento dell'unità di velocità del vento
   const handleWindChange = (event) => {
     setWindUnitTemporary(event.target.value);
   };
 
+  // Funzione per aprire il dialogo delle impostazioni
   const handleClickOpen = () => {
     setWindUnitTemporary(windSpeedUnit);
     setTempUnitTemporary(temperatureUnit);
     setOpen(true);
   };
-
+  // Funzione per gestire la chiusura del dialogo
   const handleClose = (event, reason) => {
     if (reason !== "backdropClick") {
+      // Chiude il dialogo se non si è cliccato sul backdrop
       setOpen(false);
     }
   };
+  // Funzione per salvare le impostazioni selezionate
   const handleSave = () => {
-    console.log("Dispatching wind unit: ", windUnitTemporary);
     dispatch(setTemperature(tempUnitTemporary));
     dispatch(setWind(windUnitTemporary));
-    setOpen(false);
+    setOpen(false); // Chiude il dialogo
   };
-  console.log(temperatureUnit);
 
   return (
     <div>

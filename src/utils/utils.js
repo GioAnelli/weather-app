@@ -1,6 +1,29 @@
 import { getBrowserLang } from "./geoLocations";
+import { useEffect, useState } from "react";
+
+const usePageReload = () => {
+  const [isReloaded, setIsReloaded] = useState(false);
+
+  useEffect(() => {
+    const navigationEntries = performance.getEntriesByType("navigation");
+    if (navigationEntries.length > 0) {
+      const navigationType = navigationEntries[0].type;
+      if (navigationType === "reload") {
+        setIsReloaded(true);
+      } else {
+        setIsReloaded(false);
+      }
+    }
+  }, []);
+
+  return isReloaded;
+};
+
+export default usePageReload;
 
 const browserLang = getBrowserLang();
+
+// format date from timestamp
 
 export const formatDateTime = (timestamp) => {
   const date = new Date(timestamp * 1000);
@@ -16,6 +39,8 @@ export const formatDateTime = (timestamp) => {
 
   return { timeString, dayString };
 };
+
+// convert timestamp to ISO date
 
 export const convertTimestampToISODate = (timestamp, format = "dayDate") => {
   const date = new Date(timestamp * 1000);
@@ -43,21 +68,31 @@ export const convertTimestampToISODate = (timestamp, format = "dayDate") => {
   }
 };
 
+// convert kelvin to fahrenheit
+
 export const fahrenheit = (kelvin) => {
   return Math.round(((kelvin - 273.15) * 9) / 5 + 32);
 };
+
+// convert kelvin to celsius
 
 export const celsius = (kelvin) => {
   return Math.round(kelvin - 273.15);
 };
 
+// convert meters/second to Km/h
+
 export const kmHour = (mS) => {
   return Math.round(mS * 3.6);
 };
 
+// convert meters/second to Miles/h
+
 export const milesHour = (mS) => {
   return Math.round(mS * 2.23694);
 };
+
+// convert meters/second to knots
 
 export const knots = (mS) => {
   return Math.round(mS * 1.943844);
