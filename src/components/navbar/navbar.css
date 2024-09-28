@@ -8,14 +8,14 @@
   z-index: 1;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  align-items: center;
 }
+
 .first-column {
   display: flex;
   gap: 8px;
   align-items: center;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  margin-left: 15px;
+  margin: 15px;
   height: 50px;
 }
 
@@ -29,4 +29,33 @@
 .button {
   height: 50px;
   font-weight: bold;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .nav-bar {
+    grid-template-columns: 1fr;
+    height: auto;
+    min-height: auto;
+  }
+
+  .first-column {
+    order: 1;
+  }
+
+  .third-column {
+    order: 2;
+    justify-content: center;
+  }
+
+  .second-column {
+    order: 3;
+    justify-content: center;
+  }
+
+  .button {
+    width: 100%;
+  }
 }

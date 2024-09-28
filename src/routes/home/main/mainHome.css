@@ -4,6 +4,21 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .home {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home {
+    padding: 8px;
+  }
 }

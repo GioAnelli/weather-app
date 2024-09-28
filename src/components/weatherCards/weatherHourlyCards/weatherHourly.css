@@ -1,9 +1,9 @@
 .card-container-hourly {
   display: flex;
-
   gap: 16px;
   padding: 16px;
   overflow-x: auto;
+  scroll-snap-type: x mandatory;
 }
 
 .card-wrapper-hourly {
@@ -14,11 +14,17 @@
   align-items: center;
   text-align: center;
   transition: all 0.3s ease;
+  scroll-snap-align: center;
 }
 
 .card-hourly {
   width: 150px;
   border-radius: 20px;
+  transition: transform 0.3s ease;
+}
+
+.card-hourly:hover {
+  transform: scale(1.05);
 }
 
 .card-hourly.expanded {
@@ -27,4 +33,29 @@
 
 .card-hourly-content {
   overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .card-container-hourly {
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .card-wrapper-hourly {
+    flex: 1 0 15%;
+  }
+
+  .card-hourly {
+    width: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-wrapper-hourly {
+    flex: 1 0 25%;
+  }
+
+  .card-hourly {
+    width: 100px;
+  }
 }

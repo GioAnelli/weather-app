@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -10,8 +10,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Icon from "../../icon/Icon";
-import { updatePositionAndWeather } from "../../../utils/redux/positionSlice";
-import { getCurrentPosition } from "../../../utils/geoLocations";
+
 import degreesToDirection from "../../../utils/windDegreesToDirection";
 import {
   celsius,
@@ -35,34 +34,9 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function WeatherCard({ hourlyWeather }) {
-  // const dispatch = useDispatch();
   const [expanded, setExpanded] = useState({});
   const windSpeedUnit = useSelector((state) => state.units.wind);
   const temperatureUnit = useSelector((state) => state.units.temperature);
-  // const hourlyWeather = useSelector((state) => state.position.weather.hourly);
-
-  // const setNewPosition = (position) => {
-  //   dispatch(updatePositionAndWeather(position));
-  // };
-
-  // const getPosition = () => {
-  //   getCurrentPosition()
-  //     .then((position) => {
-  //       setNewPosition({
-  //         latitude: position.coords.latitude,
-  //         longitude: position.coords.longitude,
-  //       });
-  //     })
-  //     .catch((err) => {
-  //       alert("non hai autorizzato il browser a leggere la posizione attuale");
-  //       console.log(err);
-  //       setNewPosition(undefined);
-  //     });
-  // };
-
-  // useEffect(() => {
-  //   getPosition();
-  // }, []);
 
   useEffect(() => {
     setExpanded({});

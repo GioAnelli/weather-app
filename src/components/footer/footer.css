@@ -1,15 +1,31 @@
 .footer {
-  background-color: white;
-  color: black;
-  padding: 10px;
+  background-color: var(--white);
+  color: var(--black);
+  padding: 1rem;
   text-align: center;
   position: fixed;
   bottom: 0;
   width: 100%;
   z-index: 100;
   border-top: 1px solid var(--border);
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
 }
 
 .footer-content p {
-  margin: 5px 0;
+  margin: 0.5rem 0;
+  line-height: 1.5;
 }
