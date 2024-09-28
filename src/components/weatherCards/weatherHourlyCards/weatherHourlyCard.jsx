@@ -22,6 +22,7 @@ import {
 } from "../../../utils/utils";
 import "./weatherHourly.css";
 
+// Definisce un componente ExpandMore per l'icona di espansione
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;

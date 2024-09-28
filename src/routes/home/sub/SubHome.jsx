@@ -26,35 +26,38 @@ export const SubHome = () => {
   };
 
   // Funzione per ottenere la posizione
-  const getPosition = () => {
-    getCurrentPosition()
-      .then((position) => {
+  const getPosition = async () => {
+    try {
+      getCurrentPosition().then((position) => {
         setNewPosition({
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
         });
-      })
-      .catch((err) => {
-        alert("Non hai autorizzato il browser a leggere la posizione attuale");
-        console.log(err);
       });
+    } catch (err) {
+      alert("Non hai autorizzato il browser a leggere la posizione attuale");
+      console.log(err);
+    }
   };
 
   // Effettua l'assegnazione di cityFromHome solo al primo render
   useEffect(() => {
-    if (cityFromHome && !cityInRedux) {
-      getPosition(); // Solo la prima volta
-    } else if (cityFromHome && cityInRedux) {
-      setCity(cityInRedux);
-    } else if (cityInRedux) {
-      setCity(cityInRedux); // Da Redux nelle ricerche successive
-    } else if (!cityFromHome && !cityInRedux) {
-      getPosition(); // Geolocalizzazione se nessuna città è presente
-    }
+    const fetchData = async () => {
+      if (cityFromHome && !cityInRedux) {
+        await getPosition(); // Solo la prima volta
+      } else if (cityFromHome && cityInRedux) {
+        setCity(cityInRedux);
+      } else if (cityInRedux) {
+        setCity(cityInRedux); // Da Redux nelle ricerche successive
+      } else if (!cityFromHome && !cityInRedux) {
+        await getPosition(); // Geolocalizzazione se nessuna città è presente
+      }
 
-    // Dopo il primo render, evita di usare cityFromHome in futuro
-    setFirstRender(false);
-  }, [cityInRedux, cityFromHome, firstRender]);
+      // Dopo il primo render, evita di usare cityFromHome in futuro
+      setFirstRender(false);
+    };
+    fetchData();
+  }, [cityInRedux, cityFromHome]);
 
   return (
     <div>

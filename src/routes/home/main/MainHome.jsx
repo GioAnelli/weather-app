@@ -26,19 +26,18 @@ export const MainHome = () => {
   };
 
   // Ottieni la posizione corrente del browser all'avvio della pagina
-  const getPosition = () => {
-    getCurrentPosition()
-      .then((position) => {
-        setNewPosition({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        });
-      })
-      .catch((err) => {
-        alert("Non hai autorizzato il browser a leggere la posizione attuale");
-        console.log(err);
-        setNewPosition(undefined);
+  const getPosition = async () => {
+    try {
+      const position = await getCurrentPosition();
+      setNewPosition({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
       });
+    } catch (err) {
+      alert("Non hai autorizzato il browser a leggere la posizione attuale");
+      console.log(err);
+      setNewPosition(undefined);
+    }
   };
 
   useEffect(() => {

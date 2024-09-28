@@ -22,9 +22,10 @@ import {
 } from "../../../utils/utils";
 import "./weatherDaily.css";
 
+// Definisce un componente ExpandMore per l'icona di espansione
 const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
+  const { expand, ...other } = props; // Estrae la proprietà expand
+  return <IconButton {...other} />; // Restituisce un bottone per l'icona
 })(({ theme, expand }) => ({
   transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
   marginLeft: "auto",
@@ -34,16 +35,11 @@ const ExpandMore = styled((props) => {
 }));
 
 const WeatherTable = ({ dailyWeather }) => {
-  // const dailyWeather = useSelector((state) => state.position.weather.daily);
+  // Seleziona le unità di temperatura e velocità del vento dallo stato di Redux
   const temperatureUnit = useSelector((state) => state.units.temperature);
   const windSpeedUnit = useSelector((state) => state.units.wind);
 
   const [expanded, setExpanded] = useState({});
-
-  // VERIFICA SE QUESTO SERVE ----------------------------------------
-  // useEffect(() => {
-  //   setExpanded({});
-  // }, [dailyWeather]);
 
   if (!dailyWeather) {
     return <p>Loading...</p>;
@@ -56,7 +52,7 @@ const WeatherTable = ({ dailyWeather }) => {
     );
     return <p>Error: Data format issue</p>;
   }
-
+  // Crea una riga di dati
   const createData = (
     date,
     weatherIcon,
@@ -84,6 +80,7 @@ const WeatherTable = ({ dailyWeather }) => {
   const rows = dailyWeather.map((data) => {
     let tempMin;
     let tempMax;
+    // Converte la temperatura in base all'unità selezionata
     if (temperatureUnit === "C°") {
       tempMin = celsius(data.temp.min);
       tempMax = celsius(data.temp.max);
@@ -105,7 +102,7 @@ const WeatherTable = ({ dailyWeather }) => {
     } else {
       windSpeed = data.wind_speed;
     }
-
+    // Restituisce i dati formattati
     return createData(
       convertTimestampToISODate(data.dt),
       data.weather[0].icon,

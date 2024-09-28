@@ -21,12 +21,15 @@ export default function MyLocationAutoComplete() {
   const loaded = useRef(false);
   const dispatch = useDispatch();
 
+  // Funzione per impostare la posizione nel Redux store
   const setPosition = (position) => {
     dispatch(updatePositionAndWeather(position));
   };
 
+  // Inizializza l'API di Google
   initGoogleAPI(loaded);
 
+  // Funzione per ottenere le previsioni di completamento automatico, con debounce per limitare le chiamate
   const _fetch = useMemo(
     () =>
       debounce((request, callback) => {
@@ -34,13 +37,14 @@ export default function MyLocationAutoComplete() {
           { ...request, types: ["(cities)"] },
           callback
         );
-      }, 400),
+      }, 400), // Aspetta 400 ms tra le chiamate
     []
   );
 
   useEffect(() => {
     let active = true;
 
+    // Inizializza il servizio di completamento automatico se non è già stato fatto
     if (!autocompleteService.current && window.google) {
       autocompleteService.current =
         new window.google.maps.places.AutocompleteService();
@@ -48,12 +52,12 @@ export default function MyLocationAutoComplete() {
     if (!autocompleteService.current) {
       return undefined;
     }
-
+    // Se l'input è vuoto, setta le opzioni a quelle correnti
     if (inputValue === "") {
       setOptions(value ? [value] : []);
       return undefined;
     }
-
+    // Chiamata per ottenere le previsioni di completamento automatico
     _fetch({ input: inputValue }, (results) => {
       if (active) {
         let newOptions = [];
@@ -69,7 +73,7 @@ export default function MyLocationAutoComplete() {
         setOptions(newOptions);
       }
     });
-
+    // Cleanup function per prevenire aggiornamenti se il componente è stato smontato
     return () => {
       active = false;
     };

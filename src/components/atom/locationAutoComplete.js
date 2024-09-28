@@ -4,7 +4,7 @@ function loadScript(src, position, id) {
   if (!position) {
     return;
   }
-
+  // Crea un nuovo elemento script
   const script = document.createElement("script");
   script.setAttribute("async", "");
   script.setAttribute("id", id);
@@ -12,6 +12,7 @@ function loadScript(src, position, id) {
   position.appendChild(script);
 }
 
+// Funzione per inizializzare l'API di Google Maps
 export const initGoogleAPI = (loaded) => {
   if (typeof window !== "undefined" && !loaded.current) {
     if (!document.querySelector("#google-maps")) {
@@ -21,7 +22,7 @@ export const initGoogleAPI = (loaded) => {
         "google-maps"
       );
     }
-
+    // Imposta 'loaded.current' a true per indicare che l'API è stata caricata
     loaded.current = true;
   }
 };
