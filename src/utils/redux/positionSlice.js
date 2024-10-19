@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"; // funzioni necessarie da Redux Toolkit
 import { getCity, getWeather } from "../../apis/weather/browserWeather";
-import { setMeteoDescription } from "./weatherSlice";
 
 // Crea un'azione asincrona per aggiornare la posizione e il meteo
 export const updatePositionAndWeather = createAsyncThunk(
@@ -10,7 +9,6 @@ export const updatePositionAndWeather = createAsyncThunk(
     const city = await getCity(position.latitude, position.longitude);
     const weather = await getWeather(position.latitude, position.longitude);
 
-    dispatch(setMeteoDescription(weather));
     return { position, city, weather };
   }
 );
